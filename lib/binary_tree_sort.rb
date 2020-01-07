@@ -7,17 +7,52 @@ class BinaryTree
     @right = right
   end
 
+  def self.check_left(value, node)
+    if node.left.nil?
+      node.left = BinaryTree.new(value, nil, nil)
+    else
+      compare_value(value, node.left)
+    end
+  end
+
+  def self.check_right(value, node)
+    if node.right.nil?
+      node.right = BinaryTree.new(value, nil, nil)
+    else
+      compare_value(value, node.right)
+    end
+  end
+
+  def self.compare_value(value, node)
+    if value < node.payload
+      check_left(value, node)
+    elsif value > node.payload
+      check_right(value, node)
+    end
+  end
+
+  def self.sort(list)
+    @array = list
+    @trunk = BinaryTree.new(@array.shift, nil, nil)
+
+    @array.each do |value|
+      if value < @trunk.payload
+        check_left(value, @trunk)
+      elsif value > @trunk.payload
+        check_right(value, @trunk)
+      end
+    end
+
+    @sorted_array = []
+
+    puts @trunk.inspect
+    #Create first node, because the tree is currently nil
+
+    #Create second node, to the left if it is less or the right if it is more
+
+    #After all items are placed, extract the lowest child
+
+    #circle up to all of the other children
+
+  end
 end
-
-
-#Test tree creation
-seven = BinaryTree.new(7, nil, nil)
-five  = BinaryTree.new(5, nil, nil)
-four  = BinaryTree.new(4, nil, nil)
-six   = BinaryTree.new(6, nil, seven)
-three = BinaryTree.new(3, nil, six)
-two   = BinaryTree.new(2, four, five)
-trunk = BinaryTree.new(1, two, three)
-
-#Test case to sort
-test_array = [7, 4, 9, 1, 6, 14, 10]
