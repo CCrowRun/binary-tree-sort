@@ -7,11 +7,13 @@ class BinaryTree
     @right = right
   end
 
-  def self.compare_value(value, node)
-    if value < node.payload
-      check_left(value, node)
-    elsif value > node.payload
-      check_right(value, node)
+  def self.compare_value(value)
+    if value < self.payload && self.check_left
+      return self.check_left
+    elsif value > node.payload && node.check_right
+      self.right.compare_value(value)
+    else
+      return "Hmm"
     end
   end
 
@@ -21,9 +23,15 @@ class BinaryTree
 
     @array.each do |value|
       if value < @trunk.payload
-        check_left(value, @trunk)
+        if @trunk.check_left == nil
+          @trunk.left = BinaryTree.new(value, nil, nil)
+        else
+          @trunk.left.check_left
+        end
+        puts @trunk.left
       elsif value > @trunk.payload
-        check_right(value, @trunk)
+        @trunk.right = BinaryTree.new(value, nil, nil)
+        puts "Right!"
       end
     end
 
@@ -34,13 +42,13 @@ class BinaryTree
     #circle up to all of the other children
 
   end
-  
+
 # private
   def check_left
-    self.left.nil? ? nil : self.left.payload
+    self.left.nil? ? nil : self.left
   end
 
   def check_right
-    self.right.nil? ? nil : self.right.payload
+    self.right.nil? ? nil : self.right
   end
 end

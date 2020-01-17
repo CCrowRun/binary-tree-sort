@@ -27,13 +27,13 @@ RSpec.describe :BinaryTree, type: :model do
   end
   describe 'binary tree should be able to check its nodes' do
     it 'should return the left value' do
-      expect(@trunk.check_left).to eq(2)
+      expect(@trunk.check_left.payload).to eq(2)
     end
     it 'should return the left value when nil' do
       expect(@three.check_left).to eq(nil)
     end
     it 'should return the right value' do
-      expect(@trunk.check_right).to eq(3)
+      expect(@trunk.check_right.payload).to eq(3)
     end
     it 'should return the right value if nil' do
       expect(@four.check_right).to eq(nil)
